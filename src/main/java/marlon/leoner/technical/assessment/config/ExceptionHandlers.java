@@ -1,7 +1,7 @@
 package marlon.leoner.technical.assessment.config;
 
 import marlon.leoner.technical.assessment.model.Error;
-import marlon.leoner.technical.assessment.model.exception.ObjectNotFound;
+import marlon.leoner.technical.assessment.model.exception.ObjectNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -17,7 +17,7 @@ public class ExceptionHandlers {
     }
 
     @ResponseStatus(code = HttpStatus.NOT_FOUND)
-    @ExceptionHandler(ObjectNotFound.class)
+    @ExceptionHandler(ObjectNotFoundException.class)
     public Error handleObjectNotFoundException(Exception ex) {
         return new Error(HttpStatus.NOT_FOUND.value(), ex.getMessage());
     }

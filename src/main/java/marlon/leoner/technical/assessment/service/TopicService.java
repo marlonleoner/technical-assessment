@@ -3,7 +3,7 @@ package marlon.leoner.technical.assessment.service;
 import lombok.RequiredArgsConstructor;
 import marlon.leoner.technical.assessment.dto.CreateTopicRequest;
 import marlon.leoner.technical.assessment.model.Topic;
-import marlon.leoner.technical.assessment.model.exception.ObjectNotFound;
+import marlon.leoner.technical.assessment.model.exception.ObjectNotFoundException;
 import marlon.leoner.technical.assessment.repository.TopicRepository;
 import org.springframework.stereotype.Service;
 
@@ -24,9 +24,9 @@ public class TopicService {
         return repository.findById(topicId);
     }
 
-    public Topic getTopicByIdOrException(String topicId) throws ObjectNotFound {
+    public Topic getTopicByIdOrException(String topicId) throws ObjectNotFoundException {
         Optional<Topic> topic = this.getTopic(topicId);
-        return topic.orElseThrow(() -> new ObjectNotFound(Topic.class));
+        return topic.orElseThrow(() -> new ObjectNotFoundException(Topic.class));
     }
 
     public Topic createTopic(CreateTopicRequest params) {

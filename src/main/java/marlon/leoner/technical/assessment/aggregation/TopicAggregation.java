@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import marlon.leoner.technical.assessment.dto.CreateTopicRequest;
 import marlon.leoner.technical.assessment.dto.TopicDTO;
 import marlon.leoner.technical.assessment.model.Topic;
-import marlon.leoner.technical.assessment.model.exception.ObjectNotFound;
+import marlon.leoner.technical.assessment.model.exception.ObjectNotFoundException;
 import marlon.leoner.technical.assessment.service.TopicService;
 import org.springframework.stereotype.Service;
 
@@ -23,7 +23,7 @@ public class TopicAggregation {
                 .toList();
     }
 
-    public TopicDTO getTopic(String topicId) throws ObjectNotFound {
+    public TopicDTO getTopic(String topicId) throws ObjectNotFoundException {
         Topic topic = service.getTopicByIdOrException(topicId);
         return topic.toDTO();
     }

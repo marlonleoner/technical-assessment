@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import marlon.leoner.technical.assessment.aggregation.TopicAggregation;
 import marlon.leoner.technical.assessment.dto.CreateTopicRequest;
 import marlon.leoner.technical.assessment.dto.TopicDTO;
-import marlon.leoner.technical.assessment.model.exception.ObjectNotFound;
+import marlon.leoner.technical.assessment.model.exception.ObjectNotFoundException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,7 +24,7 @@ public class TopicController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<TopicDTO> getTopic(@PathVariable("id") String topicId) throws ObjectNotFound {
+    public ResponseEntity<TopicDTO> getTopic(@PathVariable("id") String topicId) throws ObjectNotFoundException {
         return ResponseEntity.ok(aggregation.getTopic(topicId));
     }
 
