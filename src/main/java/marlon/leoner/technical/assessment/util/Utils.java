@@ -1,7 +1,11 @@
 package marlon.leoner.technical.assessment.util;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+
 import java.text.Normalizer;
 
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class Utils {
 
     public static String generateSlug(String value) {

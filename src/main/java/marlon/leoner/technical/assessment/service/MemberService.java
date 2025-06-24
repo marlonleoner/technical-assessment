@@ -30,7 +30,7 @@ public class MemberService {
 
     public Member getMemberByIdOrException(String memberId) throws ObjectNotFoundException {
         Optional<Member> member = this.getMemberById(memberId);
-        return member.orElseThrow(() -> new ObjectNotFoundException(this.getClass()));
+        return member.orElseThrow(() -> new ObjectNotFoundException(Member.class));
     }
 
     public Member createMember(CreateMemberRequest params) {

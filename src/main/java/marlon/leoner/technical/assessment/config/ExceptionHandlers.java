@@ -1,6 +1,7 @@
 package marlon.leoner.technical.assessment.config;
 
 import marlon.leoner.technical.assessment.model.Error;
+import marlon.leoner.technical.assessment.model.exception.ObjectAlreadyExistsException;
 import marlon.leoner.technical.assessment.model.exception.ObjectNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -20,5 +21,11 @@ public class ExceptionHandlers {
     @ExceptionHandler(ObjectNotFoundException.class)
     public Error handleObjectNotFoundException(Exception ex) {
         return new Error(HttpStatus.NOT_FOUND.value(), ex.getMessage());
+    }
+
+    @ResponseStatus(code = HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(ObjectAlreadyExistsException.class)
+    public Error handleObjectAlreadyExistsException(Exception ex) {
+        return new Error(HttpStatus.BAD_REQUEST.value(), ex.getMessage());
     }
 }
