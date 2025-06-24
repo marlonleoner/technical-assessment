@@ -1,16 +1,21 @@
-package marlon.leoner.technical.assessment.dto;
+package marlon.leoner.technical.assessment.dto.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import marlon.leoner.technical.assessment.model.Member;
+import jakarta.validation.constraints.*;
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
 public class CreateMemberRequest {
 
+    @NotNull(message = "O campo 'cpf' é obrigatório")
+    @Size(min = 11, max = 11, message = "O CPF deve conter 11 dígitos")
     private String cpf;
+
+    @NotBlank
     private String name;
 
     public Member toEntity() {

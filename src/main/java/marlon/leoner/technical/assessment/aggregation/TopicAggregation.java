@@ -1,7 +1,7 @@
 package marlon.leoner.technical.assessment.aggregation;
 
 import lombok.RequiredArgsConstructor;
-import marlon.leoner.technical.assessment.dto.CreateTopicRequest;
+import marlon.leoner.technical.assessment.dto.request.CreateTopicRequest;
 import marlon.leoner.technical.assessment.dto.TopicDTO;
 import marlon.leoner.technical.assessment.model.Topic;
 import marlon.leoner.technical.assessment.model.exception.ObjectNotFoundException;

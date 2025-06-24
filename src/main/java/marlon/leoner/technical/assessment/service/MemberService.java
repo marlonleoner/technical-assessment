@@ -1,7 +1,7 @@
 package marlon.leoner.technical.assessment.service;
 
 import lombok.AllArgsConstructor;
-import marlon.leoner.technical.assessment.dto.CreateMemberRequest;
+import marlon.leoner.technical.assessment.dto.request.CreateMemberRequest;
 import marlon.leoner.technical.assessment.model.Member;
 import marlon.leoner.technical.assessment.model.exception.ObjectNotFoundException;
 import marlon.leoner.technical.assessment.repository.MemberRepository;

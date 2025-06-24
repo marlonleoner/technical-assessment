@@ -1,4 +1,4 @@
-package marlon.leoner.technical.assessment.dto;
+package marlon.leoner.technical.assessment.dto.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

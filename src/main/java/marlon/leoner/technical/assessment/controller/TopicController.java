@@ -2,7 +2,7 @@ package marlon.leoner.technical.assessment.controller;
 
 import lombok.AllArgsConstructor;
 import marlon.leoner.technical.assessment.aggregation.TopicAggregation;
-import marlon.leoner.technical.assessment.dto.CreateTopicRequest;
+import marlon.leoner.technical.assessment.dto.request.CreateTopicRequest;
 import marlon.leoner.technical.assessment.dto.TopicDTO;
 import marlon.leoner.technical.assessment.model.exception.ObjectNotFoundException;
 import org.springframework.http.ResponseEntity;
