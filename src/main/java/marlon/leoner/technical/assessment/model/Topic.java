@@ -2,6 +2,7 @@ package marlon.leoner.technical.assessment.model;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -29,6 +30,8 @@ public class Topic extends BaseEntity {
     @Column(name = "status")
     private TopicStatusEnum status;
 
+    @OneToOne(mappedBy = "topic")
+    private Session session;
 
     public Topic(String name, String description) {
         super();
