@@ -2,8 +2,9 @@ package marlon.leoner.technical.assessment.aggregation;
 
 import lombok.RequiredArgsConstructor;
 import marlon.leoner.technical.assessment.domain.dto.SessionDTO;
-import marlon.leoner.technical.assessment.domain.exception.ObjectAlreadyExistsException;
+import marlon.leoner.technical.assessment.domain.exception.BaseException;
 import marlon.leoner.technical.assessment.domain.exception.ObjectNotFoundException;
+import marlon.leoner.technical.assessment.domain.exception.SessionAlreadyExistsException;
 import marlon.leoner.technical.assessment.domain.model.Session;
 import marlon.leoner.technical.assessment.domain.model.Topic;
 import marlon.leoner.technical.assessment.domain.param.CreateSessionParam;
@@ -19,8 +20,6 @@ import java.util.Optional;
 @Service
 public class SessionAggregation {
 
-    private static final String ERROR_SESSION_ALREADY_EXISTS = "Já existe uma votação vinculada à esta pauta.";
-
     private final TopicService topicService;
     private final SessionService sessionService;
 
@@ -35,7 +34,7 @@ public class SessionAggregation {
                 .toList();
     }
 
-    public SessionDTO createSession(CreateSessionParam params) throws ObjectAlreadyExistsException, ObjectNotFoundException {
+    public SessionDTO createSession(CreateSessionParam params) throws BaseException {
         validateSessionExists(params.getTopicId());
 
         Session session = SessionMapper.toEntity(params);
@@ -45,8 +44,8 @@ public class SessionAggregation {
         return SessionMapper.toDTO(session);
     }
 
-    private void validateSessionExists(String topicId) throws ObjectAlreadyExistsException {
+    private void validateSessionExists(String topicId) throws SessionAlreadyExistsException {
         Optional<Session> session = sessionService.getSessionByTopicId(topicId);
-        if (session.isPresent()) throw new ObjectAlreadyExistsException(ERROR_SESSION_ALREADY_EXISTS);
+        if (session.isPresent()) throw new SessionAlreadyExistsException();
     }
 }

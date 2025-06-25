@@ -1,12 +1,14 @@
 package marlon.leoner.technical.assessment.config;
 
+import marlon.leoner.technical.assessment.domain.exception.BaseException;
 import marlon.leoner.technical.assessment.domain.model.Error;
-import marlon.leoner.technical.assessment.domain.exception.ObjectAlreadyExistsException;
-import marlon.leoner.technical.assessment.domain.exception.ObjectNotFoundException;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
@@ -21,16 +23,13 @@ public class ExceptionHandlers {
         return new Error(HttpStatus.INTERNAL_SERVER_ERROR.value(), ex.getMessage());
     }
 
-    @ResponseStatus(code = HttpStatus.NOT_FOUND)
-    @ExceptionHandler(ObjectNotFoundException.class)
-    public Error handleObjectNotFoundException(Exception ex) {
-        return new Error(HttpStatus.NOT_FOUND.value(), ex.getMessage());
-    }
+    @ExceptionHandler(BaseException.class)
+    @ResponseBody
+    public ResponseEntity<Error> handleException(BaseException ex) {
+        Error error = new Error(ex.getCode(), ex.getMessage());
+        HttpStatusCode statusCode = HttpStatusCode.valueOf(ex.getCode());
 
-    @ResponseStatus(code = HttpStatus.BAD_REQUEST)
-    @ExceptionHandler(ObjectAlreadyExistsException.class)
-    public Error handleObjectAlreadyExistsException(Exception ex) {
-        return new Error(HttpStatus.BAD_REQUEST.value(), ex.getMessage());
+        return new ResponseEntity<>(error, statusCode);
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)

@@ -13,10 +13,4 @@ public class MemberDTO {
     private String id;
     private String cpf;
     private String name;
-
-    public MemberDTO(Member member) {
-        this.id = member.getId();
-        this.cpf = member.getCpf();
-        this.name = member.getName();
-    }
 }

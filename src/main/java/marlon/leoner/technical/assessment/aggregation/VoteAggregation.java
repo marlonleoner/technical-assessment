@@ -2,9 +2,7 @@ package marlon.leoner.technical.assessment.aggregation;
 
 import lombok.RequiredArgsConstructor;
 import marlon.leoner.technical.assessment.domain.enums.VoteOptionEnum;
-import marlon.leoner.technical.assessment.domain.exception.ObjectAlreadyExistsException;
-import marlon.leoner.technical.assessment.domain.exception.ObjectNotFoundException;
-import marlon.leoner.technical.assessment.domain.exception.SessionException;
+import marlon.leoner.technical.assessment.domain.exception.*;
 import marlon.leoner.technical.assessment.domain.model.Member;
 import marlon.leoner.technical.assessment.domain.model.Session;
 import marlon.leoner.technical.assessment.domain.model.Vote;
@@ -26,7 +24,7 @@ public class VoteAggregation {
     private final VoteService voteService;
     private final IntegrationService integrationService;
 
-    private Session getSessionOrException(String sessionId) throws ObjectNotFoundException {
+    private Session getSessionOrException(String sessionId) throws SessionNotFoundException {
         return sessionService.getSessionByIdOrException(sessionId);
     }
 
@@ -34,7 +32,7 @@ public class VoteAggregation {
         return memberService.getMemberByIdOrException(memberId);
     }
 
-    public void registerVote(CreateVoteParam params) throws Exception {
+    public void registerVote(CreateVoteParam params) throws BaseException {
         Session session = getSessionOrException(params.getSessionId());
         Member member = getMemberOrException(params.getMemberId());
 
@@ -46,16 +44,16 @@ public class VoteAggregation {
         voteService.createVote(session, member, value);
     }
 
-    private void validateSessionClosed(Session session) throws SessionException {
+    private void validateSessionClosed(Session session) throws SessionClosedException {
         session.validateIfClosed();
     }
 
-    private void validateMemberAbleToVote(Member member) throws Exception {
+    private void validateMemberAbleToVote(Member member) throws MemberNotAllowedException {
         member.validateAbleToVote();
     }
 
-    private void validateMemberVoteInSession(Session session, Member member) throws ObjectAlreadyExistsException {
+    private void validateMemberVoteInSession(Session session, Member member) throws VoteAlreadyExistsException {
         Optional<Vote> vote = voteService.getMemberVoteInSession(session, member);
-        if (vote.isPresent()) throw new ObjectAlreadyExistsException("O associado já votou nesta sessão");
+        if (vote.isPresent()) throw new VoteAlreadyExistsException();
     }
 }

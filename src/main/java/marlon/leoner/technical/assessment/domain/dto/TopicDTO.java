@@ -15,10 +15,4 @@ public class TopicDTO {
     private String id;
     private String name;
     private String slug;
-
-    public TopicDTO(Topic topic) {
-        this.id = topic.getId();
-        this.name = topic.getName();
-        this.slug = topic.getSlug();
-    }
 }

@@ -2,6 +2,7 @@ package marlon.leoner.technical.assessment.controller;
 
 import lombok.AllArgsConstructor;
 import marlon.leoner.technical.assessment.aggregation.VoteAggregation;
+import marlon.leoner.technical.assessment.domain.exception.BaseException;
 import marlon.leoner.technical.assessment.domain.param.CreateVoteParam;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,7 +18,7 @@ public class VoteController {
     private final VoteAggregation aggregation;
 
     @PostMapping
-    public ResponseEntity<Void> registerVote(@RequestBody CreateVoteParam params) throws Exception {
+    public ResponseEntity<Void> registerVote(@RequestBody CreateVoteParam params) throws BaseException {
         aggregation.registerVote(params);
         return ResponseEntity.noContent().build();
     }

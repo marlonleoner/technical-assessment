@@ -8,8 +8,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import marlon.leoner.technical.assessment.domain.dto.SessionDTO;
-import marlon.leoner.technical.assessment.domain.exception.SessionException;
+import marlon.leoner.technical.assessment.domain.exception.SessionClosedException;
 
 import java.time.LocalDateTime;
 
@@ -49,7 +48,7 @@ public class Session extends BaseEntity {
         return LocalDateTime.now().isAfter(this.finishedAt);
     }
 
-    public void validateIfClosed() throws SessionException {
-        if (isClosed()) throw new SessionException("Sessão já está encerrada");
+    public void validateIfClosed() throws SessionClosedException {
+        if (isClosed()) throw new SessionClosedException();
     }
 }

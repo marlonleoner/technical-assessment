@@ -6,7 +6,7 @@ import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import marlon.leoner.technical.assessment.domain.dto.MemberDTO;
+import marlon.leoner.technical.assessment.domain.exception.MemberNotAllowedException;
 
 @NoArgsConstructor
 @Getter
@@ -28,13 +28,7 @@ public class Member extends BaseEntity {
         this.name = name;
     }
 
-    public MemberDTO toDTO() {
-        return new MemberDTO(this);
-    }
-
-    public void validateAbleToVote() throws Exception {
-        if (!ableToVote) {
-            throw new Exception("Membro impossibilitado de votar");
-        }
+    public void validateAbleToVote() throws MemberNotAllowedException {
+        if (!ableToVote) throw new MemberNotAllowedException();
     }
 }

@@ -40,8 +40,4 @@ public class Topic extends BaseEntity {
         this.description = description;
         this.status = TopicStatusEnum.CREATED;
     }
-
-    public TopicDTO toDTO() {
-        return new TopicDTO(this);
-    }
 }
