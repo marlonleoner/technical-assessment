@@ -1,16 +1,15 @@
 package marlon.leoner.technical.assessment.domain.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.OneToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import marlon.leoner.technical.assessment.domain.exception.SessionClosedException;
+import marlon.leoner.technical.assessment.domain.exception.SessionInProgressException;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -26,11 +25,14 @@ public class Session extends BaseEntity {
     @Column(name = "duration")
     private Integer duration;
 
-    @Column(name = "started_at")
+    @Column(name = "opened_at")
     private LocalDateTime startedAt;
 
-    @Column(name = "finished_at")
+    @Column(name = "closed_at")
     private LocalDateTime finishedAt;
+
+    @OneToMany(mappedBy = "session", fetch = FetchType.EAGER)
+    private List<Vote> votes;
 
     public Session(Integer duration) {
         super();
@@ -48,7 +50,11 @@ public class Session extends BaseEntity {
         return LocalDateTime.now().isAfter(this.finishedAt);
     }
 
-    public void validateIfClosed() throws SessionClosedException {
+    public void validateIfOpen() throws SessionClosedException {
         if (isClosed()) throw new SessionClosedException();
+    }
+
+    public void validateIfClosed() throws SessionInProgressException {
+        if (!isClosed()) throw new SessionInProgressException();
     }
 }

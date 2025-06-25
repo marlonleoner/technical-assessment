@@ -45,7 +45,7 @@ public class VoteAggregation {
     }
 
     private void validateSessionClosed(Session session) throws SessionClosedException {
-        session.validateIfClosed();
+        session.validateIfOpen();
     }
 
     private void validateMemberAbleToVote(Member member) throws MemberNotAllowedException {

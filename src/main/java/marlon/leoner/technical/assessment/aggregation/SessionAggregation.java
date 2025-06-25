@@ -1,13 +1,13 @@
 package marlon.leoner.technical.assessment.aggregation;
 
 import lombok.RequiredArgsConstructor;
+import marlon.leoner.technical.assessment.domain.dto.ResultDTO;
 import marlon.leoner.technical.assessment.domain.dto.SessionDTO;
-import marlon.leoner.technical.assessment.domain.exception.BaseException;
-import marlon.leoner.technical.assessment.domain.exception.ObjectNotFoundException;
-import marlon.leoner.technical.assessment.domain.exception.SessionAlreadyExistsException;
+import marlon.leoner.technical.assessment.domain.exception.*;
 import marlon.leoner.technical.assessment.domain.model.Session;
 import marlon.leoner.technical.assessment.domain.model.Topic;
 import marlon.leoner.technical.assessment.domain.param.CreateSessionParam;
+import marlon.leoner.technical.assessment.mapper.ResultMapper;
 import marlon.leoner.technical.assessment.mapper.SessionMapper;
 import marlon.leoner.technical.assessment.service.SessionService;
 import marlon.leoner.technical.assessment.service.TopicService;
@@ -34,6 +34,11 @@ public class SessionAggregation {
                 .toList();
     }
 
+    public SessionDTO getSession(String sessionId) throws SessionNotFoundException {
+        Session session = sessionService.getSessionByIdOrException(sessionId);
+        return SessionMapper.toDTO(session);
+    }
+
     public SessionDTO createSession(CreateSessionParam params) throws BaseException {
         validateSessionExists(params.getTopicId());
 
@@ -47,5 +52,12 @@ public class SessionAggregation {
     private void validateSessionExists(String topicId) throws SessionAlreadyExistsException {
         Optional<Session> session = sessionService.getSessionByTopicId(topicId);
         if (session.isPresent()) throw new SessionAlreadyExistsException();
+    }
+
+    public ResultDTO getResult(String sessionId) throws ObjectNotFoundException, SessionInProgressException {
+        Session session = sessionService.getSessionByIdOrException(sessionId);
+        session.validateIfClosed();
+
+        return ResultMapper.toResult(session);
     }
 }

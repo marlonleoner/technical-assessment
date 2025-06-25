@@ -29,4 +29,12 @@ public class Vote extends BaseEntity {
         this.member = member;
         this.value = value;
     }
+
+    public Boolean isYes() {
+        return VoteOptionEnum.YES.equals(this.value);
+    }
+
+    public Boolean isNo() {
+        return VoteOptionEnum.NO.equals(this.value);
+    }
 }
