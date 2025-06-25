@@ -28,6 +28,40 @@ Objetivo: Implementação de uma solução para controlar sessões de votações
 
 ---
 
+## 🛠️ Endpoints Principais
+
+### 🔹 Associados (`/member`)
+
+| Método | Rota               | Descrição                          |
+|--------|--------------------|------------------------------------|
+| GET    | `/member`          | Listar todos os associados         |
+| GET    | `/member/{id}`     | Buscar um associado por ID         |
+| POST   | `/member`          | Cadastrar um novo associado        |
+
+### 🔹 Pautas (`/topic`)
+
+| Método | Rota               | Descrição                          |
+|--------|--------------------|------------------------------------|
+| GET    | `/topic`           | Listar todas as pautas             |
+| GET    | `/topic/{id}`      | Buscar uma pauta por ID            |
+| POST   | `/topic`           | Criar uma nova pauta               |
+
+### 🔹 Sessões (`/session`)
+
+| Método | Rota                     | Descrição                                      |
+|--------|--------------------------|------------------------------------------------|
+| GET    | `/session`               | Listar todas as sessões                        |
+| GET    | `/session/{id}`          | Buscar uma sessão por ID                       |
+| POST   | `/session`               | Criar uma nova sessão                          |
+| GET    | `/session/{id}/result`   | Obter o resultado da votação de uma pauta      |
+
+### 🔹 Votos (`/vote`)
+
+| Método | Rota         | Descrição                          |
+|--------|--------------|------------------------------------|
+| POST   | `/vote`      | Registrar um voto                  |
+---
+
 ## Como Executar
 
 ### Pré-requisitos
