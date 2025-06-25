@@ -1,4 +1,4 @@
-package marlon.leoner.technical.assessment.model;
+package marlon.leoner.technical.assessment.domain.model;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -7,7 +7,7 @@ import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import marlon.leoner.technical.assessment.dto.SessionDTO;
+import marlon.leoner.technical.assessment.domain.dto.SessionDTO;
 
 import java.time.LocalDateTime;
 

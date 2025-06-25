@@ -1,11 +1,11 @@
 package marlon.leoner.technical.assessment.service;
 
 import lombok.RequiredArgsConstructor;
-import marlon.leoner.technical.assessment.model.Session;
-import marlon.leoner.technical.assessment.model.Topic;
-import marlon.leoner.technical.assessment.model.exception.ObjectAlreadyExistsException;
-import marlon.leoner.technical.assessment.model.exception.ObjectNotFoundException;
-import marlon.leoner.technical.assessment.model.exception.SessionException;
+import marlon.leoner.technical.assessment.domain.model.Session;
+import marlon.leoner.technical.assessment.domain.model.Topic;
+import marlon.leoner.technical.assessment.domain.exception.ObjectAlreadyExistsException;
+import marlon.leoner.technical.assessment.domain.exception.ObjectNotFoundException;
+import marlon.leoner.technical.assessment.domain.exception.SessionException;
 import marlon.leoner.technical.assessment.repository.SessionRepository;
 import org.springframework.stereotype.Service;
 

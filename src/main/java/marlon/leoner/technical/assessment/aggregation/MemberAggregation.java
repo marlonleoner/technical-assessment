@@ -1,11 +1,11 @@
 package marlon.leoner.technical.assessment.aggregation;
 
 import lombok.AllArgsConstructor;
-import marlon.leoner.technical.assessment.dto.request.CreateMemberRequest;
-import marlon.leoner.technical.assessment.dto.MemberDTO;
-import marlon.leoner.technical.assessment.model.Member;
-import marlon.leoner.technical.assessment.model.exception.ObjectAlreadyExistsException;
-import marlon.leoner.technical.assessment.model.exception.ObjectNotFoundException;
+import marlon.leoner.technical.assessment.domain.param.CreateMemberParam;
+import marlon.leoner.technical.assessment.domain.dto.MemberDTO;
+import marlon.leoner.technical.assessment.domain.model.Member;
+import marlon.leoner.technical.assessment.domain.exception.ObjectAlreadyExistsException;
+import marlon.leoner.technical.assessment.domain.exception.ObjectNotFoundException;
 import marlon.leoner.technical.assessment.service.MemberService;
 import org.springframework.stereotype.Service;
 
@@ -27,7 +27,7 @@ public class MemberAggregation {
         return member.toDTO();
     }
 
-    public MemberDTO createMember(CreateMemberRequest params) throws ObjectAlreadyExistsException {
+    public MemberDTO createMember(CreateMemberParam params) throws ObjectAlreadyExistsException {
         Optional<Member> other = service.getMemberByCpf(params.getCpf());
         if (other.isPresent()) throw new ObjectAlreadyExistsException(Member.class);
 

@@ -1,16 +1,16 @@
 package marlon.leoner.technical.assessment.aggregation;
 
 import lombok.RequiredArgsConstructor;
-import marlon.leoner.technical.assessment.dto.TopicDTO;
-import marlon.leoner.technical.assessment.dto.request.CreateTopicRequest;
-import marlon.leoner.technical.assessment.dto.request.CreateVoteRequest;
-import marlon.leoner.technical.assessment.dto.request.CreateVotingSessionRequest;
-import marlon.leoner.technical.assessment.model.Member;
-import marlon.leoner.technical.assessment.model.Topic;
-import marlon.leoner.technical.assessment.model.enums.VoteOptionEnum;
-import marlon.leoner.technical.assessment.model.exception.ObjectAlreadyExistsException;
-import marlon.leoner.technical.assessment.model.exception.ObjectNotFoundException;
-import marlon.leoner.technical.assessment.model.exception.SessionException;
+import marlon.leoner.technical.assessment.domain.dto.TopicDTO;
+import marlon.leoner.technical.assessment.domain.param.CreateTopicParam;
+import marlon.leoner.technical.assessment.domain.param.CreateVoteParam;
+import marlon.leoner.technical.assessment.domain.param.CreateVotingSessionParam;
+import marlon.leoner.technical.assessment.domain.model.Member;
+import marlon.leoner.technical.assessment.domain.model.Topic;
+import marlon.leoner.technical.assessment.domain.enums.VoteOptionEnum;
+import marlon.leoner.technical.assessment.domain.exception.ObjectAlreadyExistsException;
+import marlon.leoner.technical.assessment.domain.exception.ObjectNotFoundException;
+import marlon.leoner.technical.assessment.domain.exception.SessionException;
 import marlon.leoner.technical.assessment.service.MemberService;
 import marlon.leoner.technical.assessment.service.SessionService;
 import marlon.leoner.technical.assessment.service.TopicService;
@@ -28,7 +28,7 @@ public class TopicAggregation {
     private final SessionService sessionService;
     private final VoteService voteService;
 
-    public TopicDTO createTopic(CreateTopicRequest params) {
+    public TopicDTO createTopic(CreateTopicParam params) {
         Topic topic = topicService.createTopic(params);
         return topic.toDTO();
     }
@@ -53,7 +53,7 @@ public class TopicAggregation {
         return memberService.getMemberByIdOrException(memberId);
     }
 
-    public void createVotingSession(String topicId, CreateVotingSessionRequest params) throws ObjectNotFoundException, ObjectAlreadyExistsException {
+    public void createVotingSession(String topicId, CreateVotingSessionParam params) throws ObjectNotFoundException, ObjectAlreadyExistsException {
         Topic topic = getTopicByIdOrException(topicId);
 
         validateSessionCreation(topic);
@@ -65,7 +65,7 @@ public class TopicAggregation {
         sessionService.validateSessionAlreadyExists(topic.getSession());
     }
 
-    public void registerVote(String topicId, CreateVoteRequest params) throws ObjectNotFoundException, ObjectAlreadyExistsException, SessionException {
+    public void registerVote(String topicId, CreateVoteParam params) throws ObjectNotFoundException, ObjectAlreadyExistsException, SessionException {
         Topic topic = getTopicByIdOrException(topicId);
         Member member = getMemberByIdOrException(params.getMemberId());
 

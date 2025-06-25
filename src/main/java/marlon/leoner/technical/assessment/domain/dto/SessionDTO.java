@@ -1,9 +1,9 @@
-package marlon.leoner.technical.assessment.dto;
+package marlon.leoner.technical.assessment.domain.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import marlon.leoner.technical.assessment.model.Session;
+import marlon.leoner.technical.assessment.domain.model.Session;
 
 import java.time.LocalDateTime;
 

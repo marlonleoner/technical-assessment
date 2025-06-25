@@ -1,9 +1,9 @@
-package marlon.leoner.technical.assessment.model;
+package marlon.leoner.technical.assessment.domain.model;
 
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import marlon.leoner.technical.assessment.model.enums.VoteOptionEnum;
+import marlon.leoner.technical.assessment.domain.enums.VoteOptionEnum;
 
 @NoArgsConstructor
 @Getter

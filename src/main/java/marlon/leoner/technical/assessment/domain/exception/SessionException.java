@@ -1,4 +1,4 @@
-package marlon.leoner.technical.assessment.model.exception;
+package marlon.leoner.technical.assessment.domain.exception;
 
 public class SessionException extends Exception {
 

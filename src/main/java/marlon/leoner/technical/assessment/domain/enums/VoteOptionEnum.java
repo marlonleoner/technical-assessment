@@ -1,4 +1,4 @@
-package marlon.leoner.technical.assessment.model.enums;
+package marlon.leoner.technical.assessment.domain.enums;
 
 import lombok.Getter;
 

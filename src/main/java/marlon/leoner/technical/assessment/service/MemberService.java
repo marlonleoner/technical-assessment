@@ -1,9 +1,9 @@
 package marlon.leoner.technical.assessment.service;
 
 import lombok.AllArgsConstructor;
-import marlon.leoner.technical.assessment.dto.request.CreateMemberRequest;
-import marlon.leoner.technical.assessment.model.Member;
-import marlon.leoner.technical.assessment.model.exception.ObjectNotFoundException;
+import marlon.leoner.technical.assessment.domain.param.CreateMemberParam;
+import marlon.leoner.technical.assessment.domain.model.Member;
+import marlon.leoner.technical.assessment.domain.exception.ObjectNotFoundException;
 import marlon.leoner.technical.assessment.repository.MemberRepository;
 import org.springframework.stereotype.Service;
 
@@ -33,7 +33,7 @@ public class MemberService {
         return member.orElseThrow(() -> new ObjectNotFoundException(Member.class));
     }
 
-    public Member createMember(CreateMemberRequest params) {
+    public Member createMember(CreateMemberParam params) {
         Member member = params.toEntity();
         return repository.save(member);
     }

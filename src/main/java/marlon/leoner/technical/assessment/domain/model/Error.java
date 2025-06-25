@@ -1,4 +1,4 @@
-package marlon.leoner.technical.assessment.model;
+package marlon.leoner.technical.assessment.domain.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

@@ -1,6 +1,6 @@
-package marlon.leoner.technical.assessment.model.exception;
+package marlon.leoner.technical.assessment.domain.exception;
 
-import marlon.leoner.technical.assessment.model.BaseEntity;
+import marlon.leoner.technical.assessment.domain.model.BaseEntity;
 
 public class ObjectAlreadyExistsException extends Exception {
 

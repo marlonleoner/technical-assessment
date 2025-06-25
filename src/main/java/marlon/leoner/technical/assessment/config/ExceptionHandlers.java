@@ -1,8 +1,8 @@
 package marlon.leoner.technical.assessment.config;
 
-import marlon.leoner.technical.assessment.model.Error;
-import marlon.leoner.technical.assessment.model.exception.ObjectAlreadyExistsException;
-import marlon.leoner.technical.assessment.model.exception.ObjectNotFoundException;
+import marlon.leoner.technical.assessment.domain.model.Error;
+import marlon.leoner.technical.assessment.domain.exception.ObjectAlreadyExistsException;
+import marlon.leoner.technical.assessment.domain.exception.ObjectNotFoundException;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.MethodArgumentNotValidException;

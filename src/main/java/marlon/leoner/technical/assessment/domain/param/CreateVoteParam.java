@@ -1,4 +1,4 @@
-package marlon.leoner.technical.assessment.dto.request;
+package marlon.leoner.technical.assessment.domain.param;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-public class CreateVoteRequest {
+public class CreateVoteParam {
 
     @JsonProperty("member_id")
     private String memberId;

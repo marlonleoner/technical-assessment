@@ -1,11 +1,11 @@
 package marlon.leoner.technical.assessment.service;
 
 import lombok.RequiredArgsConstructor;
-import marlon.leoner.technical.assessment.model.Member;
-import marlon.leoner.technical.assessment.model.Topic;
-import marlon.leoner.technical.assessment.model.Vote;
-import marlon.leoner.technical.assessment.model.enums.VoteOptionEnum;
-import marlon.leoner.technical.assessment.model.exception.ObjectAlreadyExistsException;
+import marlon.leoner.technical.assessment.domain.model.Member;
+import marlon.leoner.technical.assessment.domain.model.Topic;
+import marlon.leoner.technical.assessment.domain.model.Vote;
+import marlon.leoner.technical.assessment.domain.enums.VoteOptionEnum;
+import marlon.leoner.technical.assessment.domain.exception.ObjectAlreadyExistsException;
 import marlon.leoner.technical.assessment.repository.VoteRepository;
 import org.springframework.stereotype.Service;
 

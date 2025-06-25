@@ -1,9 +1,9 @@
 package marlon.leoner.technical.assessment.service;
 
 import lombok.RequiredArgsConstructor;
-import marlon.leoner.technical.assessment.dto.request.CreateTopicRequest;
-import marlon.leoner.technical.assessment.model.Topic;
-import marlon.leoner.technical.assessment.model.exception.ObjectNotFoundException;
+import marlon.leoner.technical.assessment.domain.param.CreateTopicParam;
+import marlon.leoner.technical.assessment.domain.model.Topic;
+import marlon.leoner.technical.assessment.domain.exception.ObjectNotFoundException;
 import marlon.leoner.technical.assessment.repository.TopicRepository;
 import org.springframework.stereotype.Service;
 
@@ -29,7 +29,7 @@ public class TopicService {
         return topic.orElseThrow(() -> new ObjectNotFoundException(Topic.class));
     }
 
-    public Topic createTopic(CreateTopicRequest params) {
+    public Topic createTopic(CreateTopicParam params) {
         Topic topic = params.toEntity();
         return repository.save(topic);
     }

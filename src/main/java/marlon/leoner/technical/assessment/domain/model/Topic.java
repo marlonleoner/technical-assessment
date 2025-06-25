@@ -1,4 +1,4 @@
-package marlon.leoner.technical.assessment.model;
+package marlon.leoner.technical.assessment.domain.model;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -7,8 +7,8 @@ import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import marlon.leoner.technical.assessment.dto.TopicDTO;
-import marlon.leoner.technical.assessment.model.enums.TopicStatusEnum;
+import marlon.leoner.technical.assessment.domain.dto.TopicDTO;
+import marlon.leoner.technical.assessment.domain.enums.TopicStatusEnum;
 import marlon.leoner.technical.assessment.util.Utils;
 
 @NoArgsConstructor

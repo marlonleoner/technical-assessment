@@ -1,9 +1,9 @@
-package marlon.leoner.technical.assessment.dto;
+package marlon.leoner.technical.assessment.domain.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import marlon.leoner.technical.assessment.model.Member;
+import marlon.leoner.technical.assessment.domain.model.Member;
 
 @AllArgsConstructor
 @NoArgsConstructor

@@ -1,10 +1,10 @@
-package marlon.leoner.technical.assessment.dto;
+package marlon.leoner.technical.assessment.domain.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import marlon.leoner.technical.assessment.model.Topic;
+import marlon.leoner.technical.assessment.domain.model.Topic;
 
 @NoArgsConstructor
 @AllArgsConstructor

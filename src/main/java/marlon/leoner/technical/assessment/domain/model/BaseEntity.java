@@ -1,4 +1,4 @@
-package marlon.leoner.technical.assessment.model;
+package marlon.leoner.technical.assessment.domain.model;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Id;
