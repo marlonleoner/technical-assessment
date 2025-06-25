@@ -4,6 +4,10 @@ import marlon.leoner.technical.assessment.model.BaseEntity;
 
 public class ObjectNotFoundException extends Exception {
 
+    public ObjectNotFoundException(String message) {
+        super(message);
+    }
+
     public ObjectNotFoundException(Class<? extends BaseEntity> type) {
         super(type.getSimpleName() + " not found");
     }

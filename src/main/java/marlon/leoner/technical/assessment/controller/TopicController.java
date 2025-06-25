@@ -2,12 +2,13 @@ package marlon.leoner.technical.assessment.controller;
 
 import lombok.AllArgsConstructor;
 import marlon.leoner.technical.assessment.aggregation.TopicAggregation;
-import marlon.leoner.technical.assessment.dto.SessionDTO;
 import marlon.leoner.technical.assessment.dto.TopicDTO;
 import marlon.leoner.technical.assessment.dto.request.CreateTopicRequest;
+import marlon.leoner.technical.assessment.dto.request.CreateVoteRequest;
 import marlon.leoner.technical.assessment.dto.request.CreateVotingSessionRequest;
 import marlon.leoner.technical.assessment.model.exception.ObjectAlreadyExistsException;
 import marlon.leoner.technical.assessment.model.exception.ObjectNotFoundException;
+import marlon.leoner.technical.assessment.model.exception.SessionException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -38,9 +39,18 @@ public class TopicController {
     }
 
     @PostMapping("/{id}/session")
-    public ResponseEntity<SessionDTO> createVotingSession(
+    public ResponseEntity<Void> createVotingSession(
             @PathVariable("id") String topicId,
             @RequestBody CreateVotingSessionRequest params) throws ObjectNotFoundException, ObjectAlreadyExistsException {
-        return ResponseEntity.ok(aggregation.createVotingSession(topicId, params));
+        aggregation.createVotingSession(topicId, params);
+        return ResponseEntity.noContent().build();
+    }
+
+    @PostMapping("/{id}/vote")
+    public ResponseEntity<Void> createVotingSession(
+            @PathVariable("id") String topicId,
+            @RequestBody CreateVoteRequest params) throws ObjectNotFoundException, ObjectAlreadyExistsException, SessionException {
+        aggregation.registerVote(topicId, params);
+        return ResponseEntity.noContent().build();
     }
 }
