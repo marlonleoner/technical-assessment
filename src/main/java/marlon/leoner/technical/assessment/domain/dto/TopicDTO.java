@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import marlon.leoner.technical.assessment.domain.model.Topic;
 
 @NoArgsConstructor
 @AllArgsConstructor

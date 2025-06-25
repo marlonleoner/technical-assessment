@@ -2,7 +2,6 @@ package marlon.leoner.technical.assessment.domain.dto;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import marlon.leoner.technical.assessment.domain.enums.ResultEnum;
 
 @NoArgsConstructor
 @Data

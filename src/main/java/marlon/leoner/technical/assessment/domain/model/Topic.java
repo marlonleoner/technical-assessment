@@ -7,7 +7,6 @@ import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import marlon.leoner.technical.assessment.domain.dto.TopicDTO;
 import marlon.leoner.technical.assessment.domain.enums.TopicStatusEnum;
 import marlon.leoner.technical.assessment.util.Utils;
 
