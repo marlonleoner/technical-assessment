@@ -5,6 +5,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import marlon.leoner.technical.assessment.domain.dto.MemberDTO;
 
 @NoArgsConstructor
@@ -19,6 +20,9 @@ public class Member extends BaseEntity {
     @Column(name = "name")
     private String name;
 
+    @Setter
+    private boolean ableToVote;
+
     public Member(String cpf, String name) {
         this.cpf = cpf;
         this.name = name;
@@ -26,5 +30,11 @@ public class Member extends BaseEntity {
 
     public MemberDTO toDTO() {
         return new MemberDTO(this);
+    }
+
+    public void validateAbleToVote() throws Exception {
+        if (!ableToVote) {
+            throw new Exception("Membro impossibilitado de votar");
+        }
     }
 }

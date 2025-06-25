@@ -3,13 +3,14 @@ package marlon.leoner.technical.assessment.domain.model;
 import jakarta.persistence.Column;
 import jakarta.persistence.Id;
 import jakarta.persistence.MappedSuperclass;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.annotations.UuidGenerator;
 
 import java.time.LocalDateTime;
 
 @MappedSuperclass
-@Data
+@Getter
 public class BaseEntity {
 
     @Id
@@ -19,6 +20,7 @@ public class BaseEntity {
     @Column(name = "created_at")
     private LocalDateTime createdAt;
 
+    @Setter
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 

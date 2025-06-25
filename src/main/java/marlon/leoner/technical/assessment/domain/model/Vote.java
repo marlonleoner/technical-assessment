@@ -12,8 +12,8 @@ import marlon.leoner.technical.assessment.domain.enums.VoteOptionEnum;
 public class Vote extends BaseEntity {
 
     @ManyToOne
-    @JoinColumn(name = "topic_id")
-    private Topic topic;
+    @JoinColumn(name = "session_id")
+    private Session session;
 
     @ManyToOne
     @JoinColumn(name = "member_id")
@@ -23,9 +23,9 @@ public class Vote extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private VoteOptionEnum value;
 
-    public Vote(Topic topic, Member member, VoteOptionEnum value) {
+    public Vote(Session session, Member member, VoteOptionEnum value) {
         super();
-        this.topic = topic;
+        this.session = session;
         this.member = member;
         this.value = value;
     }

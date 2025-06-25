@@ -1,9 +1,10 @@
 package marlon.leoner.technical.assessment.service;
 
 import lombok.AllArgsConstructor;
-import marlon.leoner.technical.assessment.domain.param.CreateMemberParam;
-import marlon.leoner.technical.assessment.domain.model.Member;
 import marlon.leoner.technical.assessment.domain.exception.ObjectNotFoundException;
+import marlon.leoner.technical.assessment.domain.model.Member;
+import marlon.leoner.technical.assessment.domain.param.CreateMemberParam;
+import marlon.leoner.technical.assessment.mapper.MemberMapper;
 import marlon.leoner.technical.assessment.repository.MemberRepository;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +16,8 @@ import java.util.Optional;
 public class MemberService {
 
     private final MemberRepository repository;
+
+    private final IntegrationService integrationService;
 
     public List<Member> getAllMembers() {
         return repository.findAll();
@@ -34,8 +37,9 @@ public class MemberService {
     }
 
     public Member createMember(CreateMemberParam params) {
-        Member member = params.toEntity();
+        Member member = MemberMapper.toEntity(params);
+        member.setAbleToVote(integrationService.isCPFValid(member.getCpf()));
+
         return repository.save(member);
     }
-
 }

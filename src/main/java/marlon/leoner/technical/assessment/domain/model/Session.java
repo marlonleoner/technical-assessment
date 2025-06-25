@@ -7,7 +7,9 @@ import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import marlon.leoner.technical.assessment.domain.dto.SessionDTO;
+import marlon.leoner.technical.assessment.domain.exception.SessionException;
 
 import java.time.LocalDateTime;
 
@@ -18,6 +20,7 @@ import java.time.LocalDateTime;
 @Table(name = "tb_session")
 public class Session extends BaseEntity {
 
+    @Setter
     @OneToOne
     private Topic topic;
 
@@ -30,19 +33,23 @@ public class Session extends BaseEntity {
     @Column(name = "finished_at")
     private LocalDateTime finishedAt;
 
-    public Session(Topic topic, Integer duration) {
+    public Session(Integer duration) {
         super();
-        this.topic = topic;
         this.duration = duration;
         this.startedAt = LocalDateTime.now();
         this.finishedAt = startedAt.plusMinutes(duration);
+    }
+
+    public Session(Topic topic, Integer duration) {
+        this(duration);
+        this.topic = topic;
     }
 
     public boolean isClosed() {
         return LocalDateTime.now().isAfter(this.finishedAt);
     }
 
-    public SessionDTO toDTO() {
-        return new SessionDTO(this);
+    public void validateIfClosed() throws SessionException {
+        if (isClosed()) throw new SessionException("Sessão já está encerrada");
     }
 }

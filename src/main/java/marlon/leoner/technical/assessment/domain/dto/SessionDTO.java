@@ -22,10 +22,5 @@ public class SessionDTO {
     @JsonProperty("end_time")
     private LocalDateTime finishTime;
 
-    public SessionDTO(Session session) {
-        this.id = session.getId();
-        this.topicId = session.getTopic().getId();
-        this.startTime = session.getStartedAt();
-        this.finishTime = session.getFinishedAt();
-    }
+    private boolean closed;
 }

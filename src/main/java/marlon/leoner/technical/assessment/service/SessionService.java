@@ -1,47 +1,41 @@
 package marlon.leoner.technical.assessment.service;
 
 import lombok.RequiredArgsConstructor;
-import marlon.leoner.technical.assessment.domain.model.Session;
-import marlon.leoner.technical.assessment.domain.model.Topic;
-import marlon.leoner.technical.assessment.domain.exception.ObjectAlreadyExistsException;
 import marlon.leoner.technical.assessment.domain.exception.ObjectNotFoundException;
-import marlon.leoner.technical.assessment.domain.exception.SessionException;
+import marlon.leoner.technical.assessment.domain.model.Session;
 import marlon.leoner.technical.assessment.repository.SessionRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.Objects;
+import java.util.List;
+import java.util.Optional;
 
 @RequiredArgsConstructor
 @Service
 public class SessionService {
 
-    private static final String ERROR_SESSION_ALREADY_EXISTS = "Já existe uma votação vinculada à esta pauta.";
     private static final String SESSION_DOES_NOT_EXIST = "Não existe uma sessão aberta para esta pauta.";
     private static final String SESSION_IS_NOT_OPEN = "A sessão informada não encontra-se aberta para votação.";
 
     private final SessionRepository repository;
 
-    public Session createSession(Topic topic, Integer duration) {
-        Session session = new Session(topic, duration);
+    public List<Session> getAllSessions() {
+        return repository.findAll();
+    }
+
+    public Optional<Session> getSessionById(String sessionId) {
+        return repository.findById(sessionId);
+    }
+
+    public Session getSessionByIdOrException(String sessionId) throws ObjectNotFoundException {
+        Optional<Session> session = getSessionById(sessionId);
+        return session.orElseThrow(() -> new ObjectNotFoundException(Session.class));
+    }
+
+    public Session save(Session session) {
         return repository.save(session);
     }
 
-    public void validateSessionExists(Session session) throws ObjectNotFoundException {
-        if (Objects.isNull(session)) {
-            throw new ObjectNotFoundException(SESSION_DOES_NOT_EXIST);
-        }
+    public Optional<Session> getSessionByTopicId(String topicId) {
+        return repository.findSessionByTopicId(topicId);
     }
-
-    public void validateSessionAlreadyExists(Session session) throws ObjectAlreadyExistsException {
-        if (Objects.nonNull(session)) {
-            throw new ObjectAlreadyExistsException(ERROR_SESSION_ALREADY_EXISTS);
-        }
-    }
-
-    public void validateSessionOpened(Session session) throws SessionException {
-        if (session.isClosed()) {
-            throw new SessionException(SESSION_IS_NOT_OPEN);
-        }
-    }
-
 }

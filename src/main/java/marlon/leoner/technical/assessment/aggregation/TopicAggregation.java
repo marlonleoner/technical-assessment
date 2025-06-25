@@ -4,7 +4,6 @@ import lombok.RequiredArgsConstructor;
 import marlon.leoner.technical.assessment.domain.dto.TopicDTO;
 import marlon.leoner.technical.assessment.domain.param.CreateTopicParam;
 import marlon.leoner.technical.assessment.domain.param.CreateVoteParam;
-import marlon.leoner.technical.assessment.domain.param.CreateVotingSessionParam;
 import marlon.leoner.technical.assessment.domain.model.Member;
 import marlon.leoner.technical.assessment.domain.model.Topic;
 import marlon.leoner.technical.assessment.domain.enums.VoteOptionEnum;
@@ -51,28 +50,5 @@ public class TopicAggregation {
 
     private Member getMemberByIdOrException(String memberId) throws ObjectNotFoundException {
         return memberService.getMemberByIdOrException(memberId);
-    }
-
-    public void createVotingSession(String topicId, CreateVotingSessionParam params) throws ObjectNotFoundException, ObjectAlreadyExistsException {
-        Topic topic = getTopicByIdOrException(topicId);
-
-        validateSessionCreation(topic);
-
-        sessionService.createSession(topic, params.getDuration());
-    }
-
-    private void validateSessionCreation(Topic topic) throws ObjectAlreadyExistsException {
-        sessionService.validateSessionAlreadyExists(topic.getSession());
-    }
-
-    public void registerVote(String topicId, CreateVoteParam params) throws ObjectNotFoundException, ObjectAlreadyExistsException, SessionException {
-        Topic topic = getTopicByIdOrException(topicId);
-        Member member = getMemberByIdOrException(params.getMemberId());
-
-        sessionService.validateSessionExists(topic.getSession());
-        sessionService.validateSessionOpened(topic.getSession());
-        voteService.validateMemberVoteInTopic(member, topic);
-
-        voteService.createVote(topic, member, VoteOptionEnum.valueOf(params.getVote()));
     }
 }
